@@ -1,17 +1,10 @@
-# Integrasi SSO-Samarinda menggunakan Laravel
-
-[![Latest Stable Version](https://poser.pugx.org/novay/sso-client/v/stable)](https://packagist.org/packages/novay/sso-client)
-[![Total Downloads](https://poser.pugx.org/novay/sso-client/downloads)](https://packagist.org/packages/novay/sso-client)
-[![Latest Unstable Version](https://poser.pugx.org/novay/sso-client/v/unstable)](https://packagist.org/packages/novay/sso-client)
-[![License](https://poser.pugx.org/novay/sso-client/license)](https://packagist.org/packages/novay/sso-client)
+# Integrasi SSO-Client Laravel
 
 Package ini berbasis pada [Simple PHP SSO skeleton](https://github.com/zefy/php-simple-sso) dan dibuat khusus agar dapat berjalan dan digunakan di framework Laravel.
 
-Teknologi Single-sign-on (sering disingkat menjadi SSO) adalah teknologi yang mengizinkan pengguna jaringan agar dapat mengakses aplikasi dalam jaringan hanya dengan menggunakan satu akun pengguna saja. Teknologi ini sangat diminati, khususnya dalam jaringan yang sangat besar dan bersifat heterogen (di saat sistem operasi serta aplikasi yang digunakan oleh komputer adalah berasal dari banyak vendor, dan pengguna dimintai untuk mengisi informasi dirinya ke dalam setiap platform yang berbeda tersebut yang hendak diakses oleh pengguna). Dengan menggunakan SSO, seorang pengguna hanya cukup melakukan proses autentikasi sekali saja untuk mendapatkan izin akses terhadap semua layanan yang terdapat di dalam jaringan.
-
 ### Requirements
-* Laravel 5.5+
-* PHP 7.1+
+* Laravel 7+
+* PHP 7.3+
 
 ### How it works?
 Client visits Broker and unique token is generated. When new token is generated we need to attach Client session to his session in Broker so he will be redirected to Server and back to Broker at this moment new session in Server will be created and associated with Client session in Broker's page. When Client visits other Broker same steps will be done except that when Client will be redirected to Server he already use his old session and same session id which associated with Broker#1.
@@ -22,11 +15,10 @@ Client visits Broker and unique token is generated. When new token is generated 
 
 #### 1. Install Package
 
-Install package ini menggunakan composer.
+
 ```shell
-$ composer require novay/sso-client
+$ composer require n0izestr3am/sso-client
 ```
-Package ini otomatis akan mendaftarkan service provider kedalam aplikasi Anda.
 
 #### 2. Publish Vendor
 
@@ -78,20 +70,19 @@ return [
 
 Buat 3 opsi baru dalam file `.env` Anda:
 ```shell
-SSO_SERVER_URL=https://sso.samarindakota.go.id
+SSO_SERVER_URL=
 SSO_BROKER_NAME=
 SSO_BROKER_SECRET=
 ```
-`SSO_SERVER_URL` berisi URI dari SSO Samarinda. `SSO_BROKER_NAME` dan `SSO_BROKER_SECRET` harus diisi sesuai dengan data aplikasi yang didaftarkan di https://sso.samarindakota.go.id.
 
 #### 4. Register Middleware
 
-Edit file `app/Http/Kernel.php` dan tambahkan `\Novay\SSO\Http\Middleware\SSOAutoLogin::class` ke grup `web` middleware. Contohnya seperti ini:
+Edit file `app/Http/Kernel.php` dan tambahkan `\n0izestr3am\SSO\Http\Middleware\SSOAutoLogin::class` ke grup `web` middleware. Contohnya seperti ini:
 ```php
 protected $middlewareGroups = [
 	'web' => [
 		...
-	    \Novay\SSO\Http\Middleware\SSOAutoLogin::class,
+	    \n0izestr3am\SSO\Http\Middleware\SSOAutoLogin::class,
 	],
 
 	'api' => [
@@ -100,7 +91,6 @@ protected $middlewareGroups = [
 ];
 ```
 
-Apabila dalam implementasinya Anda ingin melakukan penyimpanan sesi atau melakukan manipulasi pada models **User**, Anda juga bisa melakukan custom pada middleware yang telah disediakan. Contohnya:
 
 a) Buat Middleware Baru
 
@@ -115,7 +105,7 @@ b) Extend **Default Middleware** ke **Custom Middleware**
 
 namespace App\Http\Middleware;
 
-use Novay\SSO\Http\Middleware\SSOAutoLogin as Middleware;
+use n0izestr3am\SSO\Http\Middleware\SSOAutoLogin as Middleware;
 use App\Models\User;
 
 class SSOAutoLogin extends Middleware
@@ -199,15 +189,7 @@ Demikian. Untuk halaman Broker lain Anda harus mengulang semuanya dari awal hany
 
 Contoh tambahan pada file `.env`:
 ```shell
-SSO_SERVER_URL=https://sso.samarindakota.go.id
-SSO_BROKER_NAME=Situsku
+SSO_SERVER_URL=server
+SSO_BROKER_NAME=client
 SSO_BROKER_SECRET=XXXXXXXXXXXXXXXX
 ```
-
-### Credit
-* [Pemerintah Kota Samarinda](https://samarindakota.go.id).
-* [Dinas Komunikasi dan Informatika Kota Samarinda](https://diskominfo.samarindakota.go.id).
-* Bidang Aplikasi dan Layanan E-Government (Bidang 4)
-
-### License
-SSO-Samarinda for Laravel is licensed under the MIT license for both personal and commercial products. Enjoy!
