@@ -148,7 +148,7 @@ protected $middlewareGroups = [
 a) Login
 
 ```html
-<a href="{{ route('sso.authorize') }}">Login</a>
+<a href="{{ route('sso.login') }}">Login</a>
 ```
 
 b) Logout
@@ -157,35 +157,13 @@ b) Logout
 <a href="{{ route('sso.logout') }}">Logout</a>
 ```
 
-c) Manual Usage (Optional)
-
-Untuk penggunaan secara manual, Anda bisa menyisipkan potongan script berikut kedalam fungsi login dan logout pada class controller Anda.
-```php
-protected function attemptLogin(Request $request)
-{
-    $broker = new \Novay\SSO\Services\Broker;
-    
-    $credentials = $this->credentials($request);
-    return $broker->login($credentials['username'], $credentials['password']);
-}
-
-public function logout(Request $request)
-{
-    $broker = new \Novay\SSO\Services\Broker;
-    $broker->logout();
-    
-    $this->guard()->logout();
-    $request->session()->invalidate();
-    
-    return redirect('/');
-}
-```
-
 Demikian. Untuk halaman Broker lain Anda harus mengulang semuanya dari awal hanya dengan mengubah nama dan secret Broker Anda di file konfigurasi.
 
 Contoh tambahan pada file `.env`:
 ```shell
-SSO_SERVER_URL=server
-SSO_BROKER_NAME=client
-SSO_BROKER_SECRET=XXXXXXXXXXXXXXXX
+SSO_CLIENT_ID="xxxx"
+SSO_CLIENT_SECRET="xxx"
+SSO_CLIENT_CALLBACK="http://localhost/callback"
+SSO_SCOPES="view-user"
+SSO_HOST="http://localhost/server"
 ```

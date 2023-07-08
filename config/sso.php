@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'name' => 'Single Sign On - Broker (Client)', 
-    'version' => '1.0.5', 
+    'name' => 'Single Sign On (Client)',
+    'version' => '1.0.0',
 
     /*
     |--------------------------------------------------------------------------
@@ -24,15 +24,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Pengaturan Umum untuk Broker
+    | Pengaturan Umum untuk Client
     |--------------------------------------------------------------------------
-    | Beberapa parameter yang dibutuhkan untuk broker. Bisa ditemukan di
-    | https://sso.samarindakota.go.id
+
     |
     */
-    'server_url' => env('SSO_SERVER_URL', null),
-    'broker_name' => env('SSO_BROKER_NAME', null),
-    'broker_secret' => env('SSO_BROKER_SECRET', null),
+    'server_url'      => env('SSO_HOST', null),
+    'client_id'       => env('SSO_CLIENT_ID', null),
+    'client_secret'   => env('SSO_CLIENT_SECRET', null),
+    'client_callback' => env('SSO_CLIENT_CALLBACK', null),
+    'client_scopes'   => env('SSO_SCOPES', null),
 
     /*
     |--------------------------------------------------------------------------

@@ -2,10 +2,7 @@
 
 Route::prefix('oauth/sso')->namespace('n0izestr3am\\SSO\\Http\\Controllers')->middleware('web')->group(function()
 {
-	Route::get('authorize', 'OAuthController@login')->name('sso.authorize');
-	Route::get('callback', 'OAuthController@callback');
-	
-	Route::get('logout', 'OAuthController@logout')->name('sso.logout');
-
-	Route::get('import/{type?}', 'ImportController@import')->name('sso.import');
+	Route::get('/sso/login', 'SSOController@getLogin')->name('sso.login');
+	Route::get('/sso/callback', 'SSOController@getCallback')->name('sso.callback');
+	Route::get('/sso/connect', 'SSOController@connectUser')->name('sso.connect');
 });
