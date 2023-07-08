@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => 'Single Sign On (Client)',
+    'name' => 'OAuth 2.0 Single Sign On Laravel (Client)',
     'version' => '1.0.0',
 
     /*
@@ -11,7 +11,7 @@ return [
     | Arahkan kemana Anda akan tuju setelah login berhasil
     |
     */
-    'redirect_to' => '/home', 
+    'redirect_to' => env("SSO_REDIRECT_TO"),
 
     /*
     |--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ return [
     | Pilih guard auth default yang dipakai
     |
     */
-    'guard' => 'web', 
+    'guard' => 'web',
 
     /*
     |--------------------------------------------------------------------------
@@ -29,11 +29,12 @@ return [
 
     |
     */
-    'server_url'      => env('SSO_HOST', null),
-    'client_id'       => env('SSO_CLIENT_ID', null),
-    'client_secret'   => env('SSO_CLIENT_SECRET', null),
-    'client_callback' => env('SSO_CLIENT_CALLBACK', null),
-    'client_scopes'   => env('SSO_SCOPES', null),
+     //SSO credentials
+    'client_id' => env("SSO_CLIENT_ID"),
+    'client_secret' => env("SSO_CLIENT_SECRET"),
+    'callback' => env("SSO_CLIENT_CALLBACK"),
+    'scopes' => env("SSO_SCOPES"),
+    'sso_host' => env("SSO_HOST"),
 
     /*
     |--------------------------------------------------------------------------

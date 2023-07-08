@@ -1,24 +1,15 @@
 {
     "name": "n0izestr3am/sso-client",
-    "description": "SSO integration for Laravel",
+    "description": " OAuth 2.0 Single Sign On Laravel (Client)",
     "license": "MIT",
     "authors": [
-        {
-            "name": "Noviyanto Rahmadi",
-            "email": "novay@enterwind.com"
-        }, 
-        {
-            "name": "Martynas Žaliaduonis",
-            "email": "m.zaliaduonis@gmail.com"
-        },
         {
            "name": "n0izestr3am",
            "email": "n0izestr3am@gmail.com"
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
-        "zefy/php-simple-sso": "^1.0"
+        "php": "^7.3|^8.0"
     },
     "autoload": {
         "psr-4": {
