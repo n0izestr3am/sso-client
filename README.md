@@ -1,7 +1,7 @@
 # OAuth 2.0 "Single Sign On" Laravel (Client)
 
 
-### Requirements
+### Requirements Minimum
 * Laravel 7+
 * PHP 7.3+
 
@@ -15,23 +15,23 @@ $ composer require n0izestr3am/sso-client
 
 #### 2. Publish Vendor
 
-Copy file config `sso.php` ke dalam folder `config/` pada projek dengan menjalankan:
+Copy file config `sso.php` ka  folder `config/` di project client :
 ```shell
 $ php artisan vendor:publish --provider="n0izestr3am\SSO\Providers\SSOServiceProvider"
 ``` 
-Isi konten default dari file konfigurasi yang copy:
+Conto konfigurasi file nu di copy ka folder `config` di Laravel:
 ```php
 //config/sso.php
 
 return [
-    'name' => 'OAuth 2.0 Single Sign On Laravel (Client',
+    'name' => 'OAuth 2.0 Single Sign On Laravel | versi (Client)',
     'version' => '1.0.0',
 
     /*
     |--------------------------------------------------------------------------
     | Redirect to ???
     |--------------------------------------------------------------------------
-    | Redirect setelah login berhasil
+    | Redirect lamun login tos berhasil di app klien na
     |
     */
     'redirect_to' => env("SSO_REDIRECT_TO"),
@@ -52,18 +52,20 @@ return [
 
     |
     */
-     // SSO credentials
+     // SSO credentials //lokasi di folder config/sso.php
     'client_id' => env("SSO_CLIENT_ID"),
     'client_secret' => env("SSO_CLIENT_SECRET"),
     'callback' => env("SSO_CLIENT_CALLBACK"),
     'scopes' => env("SSO_SCOPES"),
     'sso_host' => env("SSO_HOST"),
+
+
 ];
 ```
 
 #### 3. Edit Environment
 
-Buat 3 opsi baru dalam file `.env` Anda:
+jieun 5 opsi di file `.env` aplikasi versi klien na:
 ```shell
 SSO_CLIENT_ID=
 SSO_CLIENT_SECRET=
@@ -72,9 +74,9 @@ SSO_SCOPES=
 SSO_HOST=
 SSO_REDIRECT_TO=
 ```
-#### 5. Usage
+#### 5. Cara make
 
-a) Login
+a) Login //
 
 ```html
 <a href="{{ route('sso.login') }}">Login</a>
@@ -86,9 +88,9 @@ b) Logout
 <a href="{{ route('sso.logout') }}">Logout</a>
 ```
 
-Untuk halaman Client lain cukup  tambahkan nama dan secret Client di file konfigurasi.
+Mun Nambah Aplikasi Client anu lain cukup tambahkeun we secret Client (nu di jieun di server SSO na)di file konfigurasi na .
 
-Contoh tambahan pada file `.env` versi Client:
+Contoh parameter di `.env` versi Client:
 ```shell
 SSO_CLIENT_ID="xxxx"
 SSO_CLIENT_SECRET="xxx"
