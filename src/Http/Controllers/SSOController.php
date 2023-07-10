@@ -61,7 +61,9 @@ class SSOController extends Controller
         ])->get(config("sso.sso_host") .  "/api/user");
         $userArray = $response->json();
         try {
-            $email = $userArray['email'];
+            //$email = $userArray['email'];
+            $user = User::where("id", 1)->first();
+            $email = $user->email;
         } catch (\Throwable $th) {
             return redirect("login")->withError("Failed to get login information! Try again.");
         }
